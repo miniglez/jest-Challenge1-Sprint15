@@ -1,13 +1,11 @@
-let products = [];
-let currentId = 0;
+let products = [{id:0, name: "patata", price:0.5}];
+let currentId = 1;
 
 const addProduct = (newName, newPrice) => {
     if(!newName || !newPrice){
         throw new Error ("Complete the values to add a product")
     }
     const index = products.findIndex(element => element.name == newName)
-    console.log(products)
-    console.log(index)
     if(index !== -1){
         throw new Error ("Product already exist")
     }
@@ -43,16 +41,16 @@ const resetproducts = () => {
 }
 
 const getProduct = (idToFind) => {
-    const prodruct = products.find(element => element.id = idToFind)
-    if(!prodruct){
+    const product = products.find(element => element.id == idToFind)
+    if(!product){
         throw new Error("Product doesn't exist")
     }
-    return prodruct
+    return product
 }
 
 const updateProduct = (idProduct, newName, newPrice) => {
-    const index = products.findIndex(element => element.id = idProduct)
-    if(!index){
+    const index = products.findIndex(element => element.id == idProduct)
+    if(index === -1){
         throw new Error("Product doesn't exist")
     }
     products[index] = {
@@ -60,7 +58,9 @@ const updateProduct = (idProduct, newName, newPrice) => {
         name: newName,
         price: newPrice
     }
-    return products
+    return "Updating success"
 }
+
+console.log(getProduct(0))
 
 module.exports = { resetproducts, addProduct, removeProduct, getProduct, updateProduct, getProducts }

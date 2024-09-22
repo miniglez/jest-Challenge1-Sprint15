@@ -1,5 +1,6 @@
 const { describe } = require("node:test");
-const { resetproducts, addProduct, removeProduct, getProduct, updateProduct} = require("./prodruct.js")
+const { resetproducts, addProduct, removeProduct, getProduct, updateProduct} = require("./product.js");
+const exp = require("constants");
 const prueba = {
     id: 0,
     name: "Arroz",
@@ -24,9 +25,11 @@ describe("addProduct", () => {
         addProduct(prueba.name, prueba.price)
         expect(() => addProduct(prueba.name, prueba.price).toThrow("Product already exist"))
     })
-    beforeEach(() => {
-        resetproducts();
-    })
+    
+})
+
+beforeEach(() => {
+    resetproducts();
 })
 
 describe("removeProduct", () => {
@@ -39,6 +42,30 @@ describe("removeProduct", () => {
     })
 })
 
+beforeEach(() => {
+    resetproducts();
+})
+
 describe("getProduct", () => {
-    addProduct
+    it("Should return error", () => {
+        expect(() => getProduct(5).toThrow("Product doesn't exist"))
+    })
+    it("Should be return the object", () => {
+        addProduct("patata", 0.5)
+        expect(getProduct(0)).toBeTruthy()
+    })
+})
+
+beforeEach(() => {
+    resetproducts();
+})
+
+describe("updateProduct", () => {
+    it("Should update the product", () => {
+        addProduct("patata", 0.5)
+        expect(updateProduct(0, "arroz", 1)).toBeTruthy()
+    })
+    it("Should fail when prouct doesn't exist", () => {
+        expect(() => updateProduct(5, "berenjena", 40).toThrow("Product doesn't exist"))
+    })
 })
