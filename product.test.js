@@ -38,3 +38,7 @@ describe("removeProduct", () => {
         expect(removeProduct(0)).toBe("Successfull removal")
     })
 })
+
+describe("getProduct", () => {
+    addProduct
+})
